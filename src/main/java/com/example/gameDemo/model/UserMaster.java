@@ -28,8 +28,6 @@ public class UserMaster {
     @Column
 	private String username;
 
-
-
     private String status;
     private String googlePayNo;
     private String phonePayNo;

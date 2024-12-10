@@ -14,7 +14,7 @@ public class LoginRequest {
 	private String mobileNo;
 
 	@NotBlank
-		private String password;
+			private String password;
 
 
 }

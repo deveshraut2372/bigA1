@@ -1,8 +1,6 @@
 package com.example.gameDemo.controller;
 
 
-
-
 import com.example.gameDemo.model.*;
 import com.example.gameDemo.payload.req.*;
 import com.example.gameDemo.payload.res.*;
@@ -69,7 +67,7 @@ public class AuthController {
     @Autowired
     private GameRateUserDao gameRateUserDao;
 
-    @PostMapping(value = "/signin")
+        @PostMapping(value = "/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         System.out.println("  loginRequest ="+loginRequest.toString());

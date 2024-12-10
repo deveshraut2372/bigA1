@@ -149,6 +149,13 @@
 			<artifactId>poiji</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version> <!-- Use the latest version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
