@@ -82,8 +82,19 @@ public class AuthController {
                 .collect(Collectors.toList());
         String role = roles.get(0);
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
-        return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-                userDetails.getMobileNo(), role));
+
+        JwtResponse jwtResponse1=new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
+                userDetails.getMobileNo(), role,"Login Succesfully ");
+
+        UserMaster userMaster=new UserMaster();
+        userMaster=userMasterDao.findById(userDetails.getId()).get();
+
+
+            JwtResponse jwtResponse2=new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
+                    userDetails.getMobileNo(), role,"Login Succesfully ", userMaster.getUsername(),userMaster.getEmail(),userMaster.getPassword(),userMaster.getStatus(),userMaster.getWalletPoints());
+
+
+        return ResponseEntity.ok(jwtResponse2);
     }
 
     @PostMapping(value = "/registration")

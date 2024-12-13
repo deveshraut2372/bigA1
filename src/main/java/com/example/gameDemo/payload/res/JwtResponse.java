@@ -1,5 +1,11 @@
 package com.example.gameDemo.payload.res;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@ToString
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
@@ -12,6 +18,21 @@ public class JwtResponse {
 
     private String roles;
 
+    private String message;
+
+    //
+    private String username;
+
+    private String email;
+
+    private String password;
+
+    private String status;
+
+    private Double walletPoints=0.0;
+
+
+
 //	public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email, String userMobNo, String roles) {
 //		this.token = accessToken;
 //		this.refreshToken = refreshToken;
@@ -22,14 +43,50 @@ public class JwtResponse {
 //	}
 
 
-    public JwtResponse(String accessToken, String refreshToken, Long id, String mobileNo, String roles) {
-        this.token = accessToken;
+    public JwtResponse(String token,String refreshToken, Long id, String mobileNo, String roles, String message) {
+        this.token = token;
         this.refreshToken = refreshToken;
         this.id = id;
-//        this.firstName = username;
         this.mobileNo = mobileNo;
         this.roles = roles;
+        this.message = message;
     }
+
+    public JwtResponse(String token, String refreshToken, Long id, String mobileNo, String roles, String message, String username, String email, String password, String status, Double walletPoints) {
+        this.token = token;
+        this.refreshToken = refreshToken;
+        this.id = id;
+        this.mobileNo = mobileNo;
+        this.roles = roles;
+        this.message = message;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.status = status;
+        this.walletPoints = walletPoints;
+    }
+
+    @Override
+    public String toString() {
+        return "JwtResponse{" +
+                "token='" + token + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                ", id=" + id +
+                ", mobileNo='" + mobileNo + '\'' +
+                ", roles='" + roles + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
+    //    public JwtResponse(String accessToken, String refreshToken, Long id, String mobileNo, String roles, String message) {
+//        this.token = accessToken;
+//        this.refreshToken = refreshToken;
+//        this.id = id;
+////        this.firstName = username;
+//        this.mobileNo = mobileNo;
+//        this.roles = roles;
+//        this.message=message;
+//    }
 
 
 
