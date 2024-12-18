@@ -3,11 +3,13 @@ package com.example.gameDemo.service.impl;
 import com.example.gameDemo.configuration.RandomNumberGenerator;
 import com.example.gameDemo.model.ERole;
 import com.example.gameDemo.model.Role;
+//import com.example.gameDemo.model.UserMaster;
 import com.example.gameDemo.model.UserMaster;
 import com.example.gameDemo.payload.req.SignupRequest;
 import com.example.gameDemo.payload.req.UserTokenReqDto;
 import com.example.gameDemo.payload.res.OtpResDto;
 import com.example.gameDemo.payload.res.PhoneNoResDto;
+import com.example.gameDemo.payload.res.UserDetailsResponse;
 import com.example.gameDemo.repository.RoleRepository;
 import com.example.gameDemo.repository.UserRepository;
 import com.example.gameDemo.service.UserMasterService;
@@ -195,6 +197,36 @@ public class UserMasterServiceImpl implements UserMasterService {
 
        userRepository.save(userMaster);
        return true;
+    }
+
+    @Override
+    public UserDetailsResponse userDetails(Long id) {
+        UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+        UserMaster master = this.userRepository.findById(id).get();
+
+        UserMaster agent = this.userRepository.findById(master.getAgentId()).get();
+        userDetailsResponse.setAgentId(agent.getId());
+        userDetailsResponse.setAgentFullName(agent.getFullName());
+
+        userDetailsResponse.setFullName(master.getFullName());
+        userDetailsResponse.setId(master.getId());
+        userDetailsResponse.setEmail(master.getEmail());
+        userDetailsResponse.setMobileNo(master.getMobileNo());
+        userDetailsResponse.setGooglePayNo(master.getGooglePayNo());
+        userDetailsResponse.setPhonePayNo(master.getPhonePayNo());
+        userDetailsResponse.setPaytmNo(master.getPaytmNo());
+        userDetailsResponse.setWalletPoints(master.getWalletPoints());
+        userDetailsResponse.setStatus(master.getStatus());
+        userDetailsResponse.setPassword(master.getPassword());
+        userDetailsResponse.setBankName(master.getBankName());
+        userDetailsResponse.setBankAccountNo(master.getBankAccountNo());
+        userDetailsResponse.setIfscCode(master.getIfscCode());
+        userDetailsResponse.setAccountHolderName(master.getAccountHolderName());
+        userDetailsResponse.setAddress(master.getAddress());
+        userDetailsResponse.setCity(master.getCity());
+        userDetailsResponse.setPinCode(master.getPinCode());
+
+        return userDetailsResponse;
     }
 
 

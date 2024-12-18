@@ -53,9 +53,9 @@ public class BannerMasterServiceImpl implements BannerMasterService {
     }
 
     @Override
-    public BannerMaster getActiveBannerMaster() {
+    public  List<BannerMaster> getActiveBannerMaster() {
 
-        BannerMaster list=bannerMasterDao.findAllByStatus("Active");
+        List<BannerMaster> list=bannerMasterDao.findAllByStatus("Active");
         return list;
     }
 

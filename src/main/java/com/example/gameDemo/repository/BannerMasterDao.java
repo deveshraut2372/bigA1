@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface BannerMasterDao extends CrudRepository<BannerMaster,Integer> {
 
-    BannerMaster findAllByStatus(String active);
+    List<BannerMaster> findAllByStatus(String active);
 
 }

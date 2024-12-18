@@ -7,6 +7,7 @@ import com.example.gameDemo.payload.req.SignupRequest;
 import com.example.gameDemo.payload.req.UserTokenReqDto;
 import com.example.gameDemo.payload.res.OtpResDto;
 import com.example.gameDemo.payload.res.PhoneNoResDto;
+import com.example.gameDemo.payload.res.UserDetailsResponse;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -43,4 +44,6 @@ public interface UserMasterService {
     Integer getUserCount();
 
     Boolean updateUserPoint(Long id, String canPlay);
+
+    UserDetailsResponse userDetails(Long id);
 }

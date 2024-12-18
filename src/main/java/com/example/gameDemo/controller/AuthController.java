@@ -30,16 +30,14 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -67,7 +65,7 @@ public class AuthController {
     @Autowired
     private GameRateUserDao gameRateUserDao;
 
-        @PostMapping(value = "/signin")
+    @PostMapping(value = "/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         System.out.println("  loginRequest ="+loginRequest.toString());
@@ -89,11 +87,11 @@ public class AuthController {
         UserMaster userMaster=new UserMaster();
         userMaster=userMasterDao.findById(userDetails.getId()).get();
 
-
-            JwtResponse jwtResponse2=new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
-                    userDetails.getMobileNo(), role,"Login Succesfully ", userMaster.getUsername(),userMaster.getEmail(),userMaster.getPassword(),userMaster.getStatus(),userMaster.getWalletPoints());
-
-
+        JwtResponse jwtResponse2=new JwtResponse(jwt, refreshToken.getToken(), userDetails.getId(),
+                userDetails.getMobileNo(), role,"Login Succesfully ", userMaster.getUsername(),userMaster.getEmail(),userMaster.getPassword(),userMaster.getStatus(),userMaster.getWalletPoints(),
+                userMaster.getAgentId(),userMaster.getFullName());
+        System.out.println("  jwtResponse2 =="+jwtResponse2.toString());
+        System.out.println("  login succsfully ");
         return ResponseEntity.ok(jwtResponse2);
     }
 
@@ -125,12 +123,21 @@ public class AuthController {
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 roles.add(userRole);
                 break;
-                case "agent":
-            userRole = roleRepository.findByName(ERole.ROLE_AGENT)
+            case "agent":
+                userRole = roleRepository.findByName(ERole.ROLE_AGENT)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 roles.add(userRole);
                 break;
             case "user":
+
+                Long agentId = signUpRequest.getAgentId();
+                if (agentId==null){
+                    user.setAgentId(1L);
+                }else {
+                    UserMaster master = this.userMasterDao.findById(agentId).get();
+                    user.setAgentId(master.getId());
+                }
+
                 userRole = roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                 roles.add(userRole);
@@ -154,7 +161,7 @@ public class AuthController {
             gameRateUserWiseMaster.setGameRateMaster(gameRateMaster1);
             gameRateUserDao.save(gameRateUserWiseMaster);
 
-            }
+        }
 
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!",true,HttpStatus.OK.value()));
@@ -193,7 +200,7 @@ public class AuthController {
 
         List<Role> role = userMasterService.getRoleByUserId();
 
-            return new ResponseEntity(role, HttpStatus.OK);
+        return new ResponseEntity(role, HttpStatus.OK);
 
     }
 
@@ -240,7 +247,7 @@ public class AuthController {
     }
     @GetMapping(value = "/getWalletPointsUserIdWise/{id}")
     public ResponseEntity getWalletPointsUserIdWise(@PathVariable Long id) {
-       Double walletPoints  = userMasterService.getWalletPointsUserIdWise(id);
+        Double walletPoints  = userMasterService.getWalletPointsUserIdWise(id);
         return new ResponseEntity(walletPoints,HttpStatus.OK);
     }
 
@@ -267,7 +274,7 @@ public class AuthController {
     @GetMapping(value = "/getUserCount")
     public ResponseEntity getUserCount() {
         Integer no = userMasterService.getUserCount();
-            return new ResponseEntity(no, HttpStatus.CREATED);
+        return new ResponseEntity(no, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/updateUserPoint/{id}/{canPlay}")
@@ -278,6 +285,12 @@ public class AuthController {
         } else {
             return new ResponseEntity(flag, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/userdetails/{id}")
+    public ResponseEntity userDetails(@PathVariable("id") Long id){
+        UserDetailsResponse userDetailsResponse = this.userMasterService.userDetails(id);
+        return new ResponseEntity(userDetailsResponse, HttpStatus.OK);
     }
 
 }

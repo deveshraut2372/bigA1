@@ -12,29 +12,33 @@ import java.util.Date;
 @NoArgsConstructor
 public class SignupRequest {
     private Long id;
+    private Long agentId;
     private String email;
     private String password;
     private String mobileNo;
     private String status;
     private String role;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String fullName;
     private String adharcard;
     private String pancard;
     private String photo;
     private String canPlay;
     private String googlePayNo;
     private String phonePayNo;
+    private String paytmNo;
     private String username;
+
+    private String address;
+    private String city;
+    private String pinCode;
 
     private Date date;
 
     private String whatsAppNo;
 
-
-    private String address;
-
-
+    private String bankAccountNo;
+    private String bankName;
+    private String ifscCode;
+    private String accountHolderName;
 
 }

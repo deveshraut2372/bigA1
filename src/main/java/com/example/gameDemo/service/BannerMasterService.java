@@ -15,7 +15,7 @@ public interface BannerMasterService {
 
     Boolean updateBannerMaster(BannerMasterReqDto bannerMasterReqDto);
 
-    BannerMaster getActiveBannerMaster();
+    List<BannerMaster> getActiveBannerMaster();
 
     List getAllBannerMasterList();
 

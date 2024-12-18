@@ -48,7 +48,7 @@ public class BannerMasterController {
     @GetMapping(value = "/getActiveList")
     public ResponseEntity getActiveBannerMaster()
     {
-        BannerMaster list = bannerMasterService.getActiveBannerMaster();
+        List<BannerMaster> list = bannerMasterService.getActiveBannerMaster();
         return new ResponseEntity(list,HttpStatus.OK);
     }
 

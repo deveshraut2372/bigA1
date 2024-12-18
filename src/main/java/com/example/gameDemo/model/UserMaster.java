@@ -26,8 +26,8 @@ public class UserMaster {
     private Long id;
 
     @Column
-	private String username;
-
+    private String username;
+    private String fullName;
     private String status;
     private String googlePayNo;
     private String phonePayNo;
@@ -80,7 +80,6 @@ public class UserMaster {
     @Column
     private String canPlay;
 
-
     @Column
     private String fcmTokenString;
 
@@ -96,4 +95,27 @@ public class UserMaster {
 
     @Column
     private String sPassword;
+
+    private Long agentId;
+
+    @Column
+    private String bankAccountNo;
+
+    @Column
+    private String bankName;
+
+    @Column
+    private String ifscCode;
+
+    @Column
+    private String accountHolderName;
+
+    @Column
+    private String paytmNo;
+
+    @Column
+    private String city;
+
+    @Column
+    private String pinCode;
 }

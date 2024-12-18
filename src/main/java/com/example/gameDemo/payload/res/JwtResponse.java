@@ -11,7 +11,7 @@ public class JwtResponse {
     private String type = "Bearer";
     private String refreshToken;
     private Long id;
-//    private String firstName;
+    //    private String firstName;
 //    private String middleName;
 //    private String lastName;
     private String mobileNo;
@@ -31,6 +31,9 @@ public class JwtResponse {
 
     private Double walletPoints=0.0;
 
+    private Long agentId;
+
+    private String fullName;
 
 
 //	public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email, String userMobNo, String roles) {
@@ -52,8 +55,9 @@ public class JwtResponse {
         this.message = message;
     }
 
-    public JwtResponse(String token, String refreshToken, Long id, String mobileNo, String roles, String message, String username, String email, String password, String status, Double walletPoints) {
+    public JwtResponse(String token, String refreshToken, Long id, String mobileNo, String roles, String message, String username, String email, String password, String status, Double walletPoints, Long agentId, String fullName) {
         this.token = token;
+
         this.refreshToken = refreshToken;
         this.id = id;
         this.mobileNo = mobileNo;
@@ -64,6 +68,8 @@ public class JwtResponse {
         this.password = password;
         this.status = status;
         this.walletPoints = walletPoints;
+        this.agentId = agentId;
+        this.fullName = fullName;
     }
 
     @Override
