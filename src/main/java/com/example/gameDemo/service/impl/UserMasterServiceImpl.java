@@ -15,6 +15,7 @@ import com.example.gameDemo.repository.UserRepository;
 import com.example.gameDemo.service.UserMasterService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -225,10 +226,17 @@ public class UserMasterServiceImpl implements UserMasterService {
         userDetailsResponse.setAddress(master.getAddress());
         userDetailsResponse.setCity(master.getCity());
         userDetailsResponse.setPinCode(master.getPinCode());
-
         return userDetailsResponse;
     }
 
+    @Override
+    public Map<String, String> getAgentIdWiseWhatsAppData(Long id) {
+        UserMaster userMaster=new UserMaster();
+        userMaster=userRepository.findById(id).get();
+        Map<String,String> response=new HashMap<>();
+        response.put("whatsAppNo",userMaster.getWhatsAppNo());
+        return response;
+    }
 
 }
 

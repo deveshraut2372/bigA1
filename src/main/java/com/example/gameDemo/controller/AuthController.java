@@ -223,6 +223,7 @@ public class AuthController {
             return new ResponseEntity(userMaster,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PutMapping(value = "/UpdateUserMaster")
     public ResponseEntity UpdateUserMaster(@RequestBody SignupRequest signupRequest) {
         MessageResponse mainResDto = new MessageResponse();
@@ -293,6 +294,13 @@ public class AuthController {
         return new ResponseEntity(userDetailsResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/getAgentIdWiseWhatsAppData/{id}")
+    public ResponseEntity getAgentIdWiseWhatsAppData(@PathVariable("id") Long id)
+    {
+        Map<String ,String> response =new HashMap<>();
+        response=userMasterService.getAgentIdWiseWhatsAppData(id);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
 }
 
 
