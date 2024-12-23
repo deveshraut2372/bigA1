@@ -76,6 +76,6 @@ public class BannerMasterServiceImpl implements BannerMasterService {
         catch (Exception e) {
             e.printStackTrace();
             return bannerMaster;
-        }    }
-
+        }
+    }
 }

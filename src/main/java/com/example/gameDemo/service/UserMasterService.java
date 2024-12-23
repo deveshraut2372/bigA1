@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Map;
 
 public interface UserMasterService {
 
@@ -46,4 +47,6 @@ public interface UserMasterService {
     Boolean updateUserPoint(Long id, String canPlay);
 
     UserDetailsResponse userDetails(Long id);
+
+    Map<String, String> getAgentIdWiseWhatsAppData(Long id);
 }

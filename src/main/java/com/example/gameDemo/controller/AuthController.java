@@ -293,6 +293,14 @@ public class AuthController {
         return new ResponseEntity(userDetailsResponse, HttpStatus.OK);
     }
 
+
+    @GetMapping("/getAgentIdWiseWhatsAppData/{id}")
+    public ResponseEntity getAgentIdWiseWhatsAppData(@PathVariable Long id)
+    {
+        Map<String,String> response =new HashMap<>();
+        response=userMasterService.getAgentIdWiseWhatsAppData(id);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
 }
 
 

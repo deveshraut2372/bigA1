@@ -225,11 +225,17 @@ public class UserMasterServiceImpl implements UserMasterService {
         userDetailsResponse.setAddress(master.getAddress());
         userDetailsResponse.setCity(master.getCity());
         userDetailsResponse.setPinCode(master.getPinCode());
-
         return userDetailsResponse;
     }
 
-
+    @Override
+    public Map<String, String> getAgentIdWiseWhatsAppData(Long id) {
+        UserMaster userMaster=new UserMaster();
+        userMaster=userRepository.findById(id).orElseThrow(RuntimeException::new);
+        Map<String,String> response =new HashMap<>();
+        response.put("whatsAppNo",userMaster.getWhatsAppNo());
+        return response;
+    }
 }
 
 
